@@ -1,58 +1,51 @@
 
-public class ColaDoble {
+public class ColaDobleM {
 
     private String C[];
     private int tam;
     private int izq;
     private int der;
 
-    public ColaDoble() {
+    public ColaDobleM() {
         tam = 5;
-        izq = -1;
-        der = -1;
+        izq = tam / 2 + 1;// 2+1 = 3
+        der = tam / 2; // 2
         C = new String[tam];
     }
 
-    public ColaDoble(int tam) {
+    public ColaDobleM(int tam) {
         this.tam = tam;
-        izq = -1;
-        der = -1;
+        izq = tam / 2 + 1;// 2+1 = 3
+        der = tam / 2; // 2
         C = new String[tam];
     }
 
     public boolean vacia() {
-        return izq == -1 && der == -1;
-    }
-
-    public boolean llena() {
-        return (der == tam - 1 && izq == 0) || der + 1 == izq;
-    }
-
-    public boolean llenaIzq() {
-        return izq == 0;
+        return izq > der;
     }
 
     public boolean llenaDer() {
-        return der == tam - 1;
+        return (der == tam -1);
+    }
+
+    public boolean llenaIzq() {
+        return (izq == 0);
     }
 
     public void pushDer(String c) {
         if (llenaDer()) {
             System.out.println("Cola llena por la derecha");
         } else {
-           C[++der] = c;
-           if(izq==-1) izq = 0;
+            C[++der] = c;
         }
-
     }
 
     public void pushIzq(String c) {
-        if (llenaIzq()|| izq == -1) {
+        if (llenaIzq()) {
             System.out.println("Cola llena por la izquierda");
         } else {
             C[--izq] = c;
         }
-
     }
 
     public String popDer() {
@@ -60,11 +53,7 @@ public class ColaDoble {
         if (vacia()) {
             System.out.println("Cola vacia");
         } else {
-           d = C[izq++];
-            //C[inicio]= null;
-            if (izq > der) {
-                der = izq = -1;
-            }
+            d = C[der--];
         }
         return d;
     }
@@ -75,10 +64,6 @@ public class ColaDoble {
             System.out.println("Cola vacia");
         } else {
             d = C[izq++];
-            //C[inicio]= null;
-            if (izq > der) {
-                der = izq = -1;
-            }
         }
         return d;
     }
@@ -87,29 +72,29 @@ public class ColaDoble {
         if (vacia()) {
             System.out.println("Cola vacia");
         } else {
-            for (int i = izq; i <= der; i++) {
-                System.out.println("[" + C[i] + "]");
+            for (int j = izq; j <= der; j++) {
+                System.out.println("[" + C[j] + "]");
             }
         }
+
         System.out.println("----------");
     }
 
     public static void main(String[] args) {
-        ColaDoble c = new ColaDoble(4);
+        ColaDobleM c = new ColaDobleM(4);
         c.popDer();
         c.popIzq();
-        c.pushIzq("1");
+        c.pushDer("1");
         c.pushDer("2");
-        c.pushDer("2");        
-        c.pushDer("2");        
-        c.pushDer("2");
-        c.pushDer("2");
+        c.pushIzq("!");
+        c.pushIzq("!");
+        c.pushIzq("!");
+        c.pushIzq("!");
+        c.popDer();
+        c.popDer();
         c.popDer();
         c.popDer();
         c.popIzq();
         c.popDer();
-        c.popDer();  
-        c.popDer();        
-        c.mostrar();
     }
 }

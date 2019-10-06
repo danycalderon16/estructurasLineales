@@ -1,10 +1,14 @@
+package InterfazColaCir;
+
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ColaCircular {
 
     private String C[];
-    private int tam;
-    private int inicio;
-    private int fin;
+    public int tam;
+    public int inicio;
+    public int fin;
 
     public ColaCircular() {
         tam = 5;
@@ -28,9 +32,9 @@ public class ColaCircular {
         return (fin == tam - 1 && inicio == 0) || fin + 1 == inicio;
     }
 
-    public void push(String c) {
+    public int push(String c) {
         if (llena()) {
-            System.out.println("Cola llena");
+            showMessageDialog(null,"Cola llena","Error",JOptionPane.ERROR_MESSAGE);
         } else {
             C[(fin == (tam - 1)) ? fin = 0 : ++fin] = c;
             if (inicio == -1) {
@@ -38,22 +42,26 @@ public class ColaCircular {
             }
             // C[0] = c;
         }
+        return fin;
     }
 
-    public String pop() {
-            String d = null;
+    public int pop() {
+        String d = null;
+        int n= 0;
         if (vacia()) {
-            System.out.println("Cola vacia");
+            showMessageDialog(null,"Cola vacia","Error",JOptionPane.ERROR_MESSAGE);
         } else {
             d = C[inicio];
+            n = inicio;
             //C[inicio]= null;
             if (inicio == fin) {
                 fin = inicio = -1;
             } else {
+               
                 inicio = (inicio == (tam - 1)) ? inicio = 0 : ++inicio;
             }// ++inicio; if(inicio == tam) inicio = 0;
         }
-        return d;
+        return n;
     }
 
     public void mostrar() {
